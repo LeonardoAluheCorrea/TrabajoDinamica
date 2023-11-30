@@ -5,8 +5,11 @@
 package trabajofinalanalisis;
 
 import Utiles.GrafoEtiquetado;
+import Utiles.NodoVert;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -35,7 +38,17 @@ public class TrabajoFinalAnalisis {
         grafoDeFrobenius = construirGrafoDeFrobenius(A);
         System.out.println(grafoDeFrobenius.toString());
         System.out.println("Tiempo hasta ahora en ms: " + System.currentTimeMillis());
-        //Ahora buscamos el camino menos costoso desde 0 hasta todos los otros vertices y nos quedamos con el mas costoso de todos
+        
+        //Primero buscamos los caminos menos costosos desde 0 hasta todos los otros vertices con Dijstra
+        HashMap<NodoVert,Integer> caminosMasCortos = (HashMap) grafoDeFrobenius.dijkstra(0);
+        for(HashMap.Entry entry: caminosMasCortos.entrySet()){
+            System.out.println(entry.getKey() + "   " + entry.getValue());
+            maxCosto = maximo(maxCosto,(int)entry.getValue());
+        }
+        System.out.println("El nro de Frobenius es: " + (maxCosto - A[0]));
+        
+        //Ahora buscamos con el algoritmo propio
+        maxCosto = -1;
         for (int i = 1; i < A[0]; i++){
             maxCosto = maximo(maxCosto,grafoDeFrobenius.costoCaminoMasRapido(0,i));
         }
