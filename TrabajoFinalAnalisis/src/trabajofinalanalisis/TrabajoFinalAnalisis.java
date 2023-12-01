@@ -22,7 +22,7 @@ public class TrabajoFinalAnalisis {
      */
     public static void main(String[] args) throws FileNotFoundException {
         GrafoEtiquetado grafoDeFrobenius;
-        int[] A = new int[100]; //Tener cuidado de acomodar el tamaño del arreglo a la cantidad de nros
+        int[] A = new int[30]; //Tener cuidado de acomodar el tamaño del arreglo a la cantidad de nros
         int maxCosto = -1;
         Scanner scan = new Scanner(new File(System.getProperty("user.dir") + "\\src\\trabajofinalanalisis\\nros.txt"));
         int c = 0;
@@ -35,8 +35,9 @@ public class TrabajoFinalAnalisis {
         scan.close();
         
         //Construimos el grafo circulante y lo mostramos
+        System.out.println("Construyendo el grafo...");
         grafoDeFrobenius = construirGrafoDeFrobenius(A);
-        System.out.println(grafoDeFrobenius.toString());
+        //System.out.println(grafoDeFrobenius.toString());
         tiempo = System.currentTimeMillis();
         System.out.println("Tiempo de construir el grafo en ms: " + tiempo);
         
